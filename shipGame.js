@@ -60,10 +60,10 @@ var model = {
 		var direction = Math.floor(Math.random() * 2);
 		var row, col;
 
-		if (direction === 1) { // W poziomie.
+		if (direction === 1) { 
 			row = Math.floor(Math.random() * this.boardSize);
 			col = Math.floor(Math.random() * (this.boardSize - this.shipLength));
-		} else { // W pionie.
+		} else { 
 			row = Math.floor(Math.random() * (this.boardSize - this.shipLength));
 			col = Math.floor(Math.random() * this.boardSize);
 		}
@@ -150,9 +150,6 @@ function parseGuess(guess) {
 	return null;
 }
 
-
-// Funkcje obsługi zdarzeń.
-
 function handleFireButton() {
 	var guessInput = document.getElementById("guessInput");
 	var guess = guessInput.value.toUpperCase();
@@ -177,7 +174,33 @@ function init() {
 	
 	var fireButton = document.getElementById("fireButton");
 	fireButton.onclick = handleFireButton;
-    var guessInput = document.getElementById("guessInput");
+
+
+	var guessInput = document.getElementById("guessInput");
 	guessInput.onkeypress = handleKeyPress;
+
+	
 	model.generateShipLocations();
 }
+
+var pole;
+
+  function getid(obj) {
+    pole = obj.id;
+    console.log(pole);
+}
+
+  function WhichButton(event) {
+    if (event.button === 0) {
+		if (pole) {
+			controller.guesses++;
+			var hit = model.fire(pole);
+			if (hit && model.shipsSunk === model.numShips) {
+               view.displayMessage("Zatopiłeś wszystkie moje okręty, w " +
+                        controller.guesses + " próbach.");
+			}
+		}
+    } else {
+      alert("Ups, pole poza planszą!");
+    }
+  }
