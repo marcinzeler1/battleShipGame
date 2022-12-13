@@ -1,14 +1,25 @@
+
 var model = {
 	boardSize: 7,
 	numShips: 3,
 	shipLength: 3,
 	shipsSunk: 0,
+	maxBoxNumber: 66,
+	allSpaceBookedUp: [],
 	
 	ships: [
 		{ locations: [0, 0, 0], hits: ["", "", ""] },
 		{ locations: [0, 0, 0], hits: ["", "", ""] },
 		{ locations: [0, 0, 0], hits: ["", "", ""] }
 	],
+
+	spaceBookedUp: function(table) {
+		var ear = table.concat(this.allSpaceBookedUp);
+		this.allSpaceBookedUp = ear;
+		//var conver = Number(X);
+		//this.allSpaceBookedUp.push(conver)
+		//console.log(typeof(conver));
+	},
 
 	fire: function(guess) {
 		for (var i = 0; i < this.numShips; i++) {
@@ -46,15 +57,170 @@ var model = {
 
 	generateShipLocations: function() {
 		var locations;
-		for (var i = 0; i < this.numShips; i++) {
+		var spaceNext;
+		for (var k = 0; k < this.numShips; k++) {
 			do {
 				locations = this.generateShip();
+				
 			} while (this.collision(locations));
-			this.ships[i].locations = locations;
+			
+				this.ships[k].locations = locations;
+
+				//locations.forEach(e=>this.spaceBookedUp(e));
+				spaceNext = this.spaceBookedUp(locations);
+
+				if ((Number(locations[0]) + 2) === Number(locations[2])) { // if horizonatl
+
+					var spaceWindow = Number(locations[0]) + 3;
+					var spaceWindow1 = Number(locations[0]) - 1;
+
+					if (spaceWindow >=0 && spaceWindow < 10) {
+						spaceWindow = "0" + spaceWindow;
+						//var con = Number(spaceWindow); ////////////////////////////////////////
+						this.allSpaceBookedUp.push(spaceWindow);//////////////////////////////////////
+					} else if (spaceWindow >= 10 && spaceWindow < this.maxBoxNumber) {
+						this.allSpaceBookedUp.push(String(spaceWindow));
+					} else {
+						console.log("liczby poza skala");
+					}
+
+
+					if (spaceWindow1 >=0 && spaceWindow1 < 10) {
+						spaceWindow1 = "0" + spaceWindow1;
+						//var con = Number(spaceWindow1);
+						this.allSpaceBookedUp.push(spaceWindow1);
+					} else if (spaceWindow1 >= 10 && spaceWindow1 < this.maxBoxNumber) {
+						this.allSpaceBookedUp.push(String(spaceWindow1));
+					} else {
+						console.log("liczby poza skala");
+					}
+					//console.log(this.space.push = Number(locations[0]) + 3);
+
+					//console.log(this.space.push = Number(locations[0]) - 1);
+					
+					for (var i = 8; i <= 12; i++) {
+						var spaceWindow2 = Number(locations[1]) + i;
+						if (spaceWindow2 >=0 && spaceWindow2 < 10) {
+							spaceWindow2 = "0" + spaceWindow2;
+							//var con = Number(spaceWindow2);
+							this.allSpaceBookedUp.push(spaceWindow2);
+						} else if (spaceWindow2 >= 10 && spaceWindow2 < this.maxBoxNumber) {
+							this.allSpaceBookedUp.push(String(spaceWindow2));
+						} else {
+							console.log("liczby poza skala");
+						}
+
+						var spaceWindow3 = Number(locations[1]) - i;
+						if (spaceWindow3 >=0 && spaceWindow3 < 10) {
+							spaceWindow3 = "0" + spaceWindow3;
+							//var con = Number(spaceWindow3);
+							this.allSpaceBookedUp.push(spaceWindow3);
+						} else if (spaceWindow3 >= 10 && spaceWindow3 < this.maxBoxNumber) {
+							this.allSpaceBookedUp.push(String(spaceWindow3));
+						} else {
+							console.log("liczby poza skala");
+						}
+					}
+
+				} else {
+					var spaceWindow4 = Number(locations[1]) + 1;
+					var spaceWindow5 = Number(locations[1]) - 1;
+					var spaceWindow6 = Number(locations[1]) + 9;
+					var spaceWindow7 = Number(locations[1]) - 9;
+					var spaceWindow10 = Number(locations[1]) + 11;
+					var spaceWindow11 = Number(locations[1]) - 11;
+
+					if (spaceWindow4 >=0 && spaceWindow4 < 10) {
+						spaceWindow4 = "0" + spaceWindow4;
+						//var con = Number(spaceWindow4);
+						this.allSpaceBookedUp.push(spaceWindow4);
+					} else if (spaceWindow4 >= 10 && spaceWindow4 < this.maxBoxNumber) {
+						this.allSpaceBookedUp.push(String(spaceWindow4));
+					} else {
+						console.log("liczby poza skala");
+					}
+
+					if (spaceWindow5 >=0 && spaceWindow5 < 10) {
+						spaceWindow5 = "0" + spaceWindow5;
+						//var con = Number(spaceWindow5);
+						this.allSpaceBookedUp.push(spaceWindow5);
+					} else if (spaceWindow5 >= 10 && spaceWindow5 < this.maxBoxNumber) {
+						this.allSpaceBookedUp.push(String(spaceWindow5));
+					} else {
+						console.log("liczby poza skala");
+					}
+
+					if (spaceWindow6 >=0 && spaceWindow6 < 10) {
+						spaceWindow6 = "0" + spaceWindow6;
+						//var con = Number(spaceWindow6);
+						this.allSpaceBookedUp.push(spaceWindow6);
+					} else if (spaceWindow6 >= 10 && spaceWindow6 < this.maxBoxNumber) {
+						this.allSpaceBookedUp.push(String(spaceWindow6));
+					} else {
+						console.log("liczby poza skala");
+					}
+
+					if (spaceWindow7 >=0 && spaceWindow7 < 10) {
+						spaceWindow7 = "0" + spaceWindow7;
+						//var con = Number(spaceWindow7);
+						this.allSpaceBookedUp.push(spaceWindow7);
+					} else if (spaceWindow7 >= 10 && spaceWindow7 < this.maxBoxNumber) {
+						this.allSpaceBookedUp.push(String(spaceWindow7));
+					} else {
+						console.log("liczby poza skala");
+					}
+
+					if (spaceWindow10 >=0 && spaceWindow10 < 10) {
+						spaceWindow10 = "0" + spaceWindow10;
+						//var con = Number(spaceWindow10);
+						this.allSpaceBookedUp.push(spaceWindow10);
+					} else if (spaceWindow10 >= 10 && spaceWindow10 < this.maxBoxNumber) {
+						this.allSpaceBookedUp.push(String(spaceWindow10));
+					} else {
+						console.log("liczby poza skala");
+					}
+
+					if (spaceWindow11 >=0 && spaceWindow11 < 10) {
+						spaceWindow11 = "0" + spaceWindow11;
+						//var con = Number(spaceWindow11);
+						this.allSpaceBookedUp.push(spaceWindow11);
+					} else if (spaceWindow11 >= 10 && spaceWindow11 < this.maxBoxNumber) {
+						this.allSpaceBookedUp.push(String(spaceWindow11));
+					} else {
+						console.log("liczby poza skala");
+					}
+
+					for (var i = 19; i <= 21; i++) {
+						var spaceWindow8 = Number(locations[1]) + i;
+						if (spaceWindow8 >=0 && spaceWindow8 < 10) {
+							spaceWindow8 = "0" + spaceWindow8;
+							//var con = Number(spaceWindow8);
+							this.allSpaceBookedUp.push(spaceWindow8);
+						} else if (spaceWindow8 >= 10 && spaceWindow8 < this.maxBoxNumber) {
+							this.allSpaceBookedUp.push(String(spaceWindow8));
+						} else {
+							console.log("liczby poza skala");
+						}
+
+						var spaceWindow9 = Number(locations[1]) - i;
+						if (spaceWindow9 >=0 && spaceWindow9 < 10) {
+							spaceWindow9 = "0" + spaceWindow9;
+							//var con = Number(spaceWindow9);
+							this.allSpaceBookedUp.push(spaceWindow9);
+						} else if (spaceWindow9 >= 10 && spaceWindow9 < this.maxBoxNumber) {
+							this.allSpaceBookedUp.push(String(spaceWindow9));
+						} else {
+							console.log("liczby poza skala");
+						}
+					}			
+				}
 		}
-		console.log("Tablica okrętów: ");
+		console.log(this.allSpaceBookedUp);
 		console.log(this.ships);
+		//console.log(typeof(locations));
 	},
+
+	
 
 	generateShip: function() {
 		var direction = Math.floor(Math.random() * 2);
@@ -81,9 +247,10 @@ var model = {
 
 	collision: function(locations) {
 		for (var i = 0; i < this.numShips; i++) {
-			var ship = this.ships[i];
+			//var ship = this.ships[i]; // pierwotny kod
 			for (var j = 0; j < locations.length; j++) {
-				if (ship.locations.indexOf(locations[j]) >= 0) {
+				if (this.allSpaceBookedUp.indexOf(locations[j]) >= 0) {
+				//if (ship.locations.indexOf(locations[j]) >= 0) { pierwotny kod
 					return true;
 				}
 			}
@@ -92,7 +259,7 @@ var model = {
 	}
 	
 };
-
+//console.log(space);
 
 var view = {
 	displayMessage: function(msg) {
@@ -149,6 +316,7 @@ function parseGuess(guess) {
 	}
 	return null;
 }
+
 
 function handleFireButton() {
 	var guessInput = document.getElementById("guessInput");
